@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
+
 
 const NoteApp = () => {
 
@@ -23,10 +24,25 @@ const NoteApp = () => {
       setNotes(notes.filter((note) => note.title !== title));
     };
 
+    useEffect(() => {
+        const notesData = JSON.parse(localStorage.getItem("notes"));
+
+        if (notesData) {
+            setNotes(notesData);
+        }
+
+    }, []);
+
+    useEffect(() => {
+        console.log("aaaaaaa")
+        localStorage.setItem("notes", JSON.stringify(notes));
+    }, [notes]);
+
+
     return(
         <div>
             <h1>Notes</h1>
-            {notes.map((note) => (
+            { notes.map((note) => (
                 <div key={note.title}>
                     <h3>{note.title}</h3>
                     <p>{note.body}</p>
@@ -47,9 +63,18 @@ const NoteApp = () => {
 
 
 
-/*const App = (props) => {
+const App = (props) => {
     const [count, setCount] = useState(props.count);
     const [text, setText] = useState("");
+
+    useEffect(() => {
+       console.log("should only run once");
+    },[]);
+
+    useEffect(() => {
+        console.log("use effest");
+        document.title = count;
+    }, [count]);
 
     return (
         <div>
@@ -65,7 +90,7 @@ const NoteApp = () => {
 App.defaultProps = {
     count: 8
 };
-*/
+
 
 ReactDOM.render(<NoteApp/>, document.getElementById('root'));
 
