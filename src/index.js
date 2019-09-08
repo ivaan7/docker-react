@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
-
 const NoteApp = () => {
 
     const [notes, setNotes] = useState([]);
@@ -38,16 +37,11 @@ const NoteApp = () => {
         localStorage.setItem("notes", JSON.stringify(notes));
     }, [notes]);
 
-
-    return(
+    return (
         <div>
             <h1>Notes</h1>
             { notes.map((note) => (
-                <div key={note.title}>
-                    <h3>{note.title}</h3>
-                    <p>{note.body}</p>
-                    <button onClick={() => removeNote(note.title)}>x</button>
-                </div>
+                <Note key={note.title} note={note} removeNote={removeNote}/>
             ))}
             <p>Add note</p>
             <form onSubmit={addNote}>
@@ -61,6 +55,24 @@ const NoteApp = () => {
 };
 
 
+const Note = ({note, removeNote}) => {
+
+    useEffect(() => {
+       console.log("eee-----")
+
+        return () => {
+           console.log("Cleanup")
+        }
+    }, []);
+
+    return (
+        <div>
+            <h3>{note.title}</h3>
+            <p>{note.body}</p>
+            <button onClick={() => removeNote(note.title)}>x</button>
+        </div>
+    )
+};
 
 
 const App = (props) => {
