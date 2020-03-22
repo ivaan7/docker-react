@@ -70,7 +70,7 @@ const NoteApp = () => {
             { notes.map((note) => (
                 <Note key={note.title} note={note} removeNote={removeNote}/>
             ))}
-            <p>Addte!!!</p>
+            <p>Add note!!!</p>
             <form onSubmit={addNote}>
                 <input value={title} onChange={(e) => setTitle(e.target.value)}/>
                 <textarea value={body} onChange={(e) => setBody(e.target.value)}/>
