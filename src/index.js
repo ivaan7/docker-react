@@ -18,6 +18,7 @@ const notesReducer = (state, action) => {
   }
 };
 
+
 const NoteApp = () => {
 
    // const [notes, setNotes] = useState([]);
